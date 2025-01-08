@@ -1,0 +1,60 @@
+---
+# Create both types of cron jobs, as well as create and delete a cron job.
+dependency:
+  name: 'galaxy'
+driver:
+  name: 'podman'
+provisioner:
+  name: 'ansible'
+  config_options:
+    defaults:
+      interpreter_python: 'auto_silent'
+      callback_whitelist: 'profile_tasks, timer, yaml'
+    ssh_connection:
+      pipelining: false
+  inventory:
+    group_vars:
+      all:
+        cron_jobs:
+          cron_present:
+            special_time: 'daily'
+            user: 'root'
+            job: 'echo cron_present'
+            state: 'present'
+          cron_absent:  # expected deletion at final state
+            month: '*'
+            weekday: '*'
+            day: '*'
+            hour: '*'
+            minute: '*'
+            user: 'root'
+            job: 'echo cron_absent'
+            state: 'present'
+platforms:
+  - name: 'cron-debian-12-default'
+    image: 'ghcr.io/hifis-net/debian-systemd:12'
+    systemd: 'always'
+    volumes:
+      - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+    command: '/lib/systemd/systemd'
+    pre_build_image: true
+verifier:
+  name: 'ansible'
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .
+scenario:
+  test_sequence:
+    # - 'dependency'
+    # - 'cleanup'
+    - 'destroy'
+    - 'syntax'
+    - 'create'
+    # - 'prepare'
+    - 'converge'
+    # - 'idempotence'  # cronjobs are created only once.
+    # - 'side_effect'
+    - 'verify'
+    # - 'cleanup'
+    - 'destroy'

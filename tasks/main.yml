@@ -1,0 +1,15 @@
+---
+- name: 'Install packages'
+  ansible.builtin.include_role:
+    name: 'r_pufky.srv.apt'
+  vars:
+    apt_packages:
+      - '{{ cron_role_packages }}'
+    apt_package_update_cache: true
+
+- name: 'Cron'
+  ansible.builtin.include_tasks: 'cron.yml'
+  vars:
+    job_name: '{{ item.key }}'
+    config: '{{ item.value }}'
+  loop: '{{ cron_jobs | default({}) | dict2items }}'

@@ -1,0 +1,75 @@
+---
+# yamllint disable rule:line-length
+###############################################################################
+# Cron Jobs
+###############################################################################
+# Configuration of cron jobs.
+#
+# Modern job scheduling (systemd) is highly preferred to cronjobs for security,
+# resource management, time resolution, event-based triggering, centralized
+# logging, and dependency management.
+#
+# Special Case:
+#   special_time: special_time and month,weekday,day,hour,minute settings are
+#                 mutually exclusive. If both are set special_time is used.
+#          {JOB}: cron job name. This will also be the filename in /etc/cron.d
+#
+# cron_jobs:
+#     dict - cron jobs configuration based on ansible.builtin.cron.
+#   {JOB}:
+#     month: str - month job should run in
+#         Default: '*'.
+#     weekday: str - weekday job should run in
+#         Default: '*'.
+#     day: str - day job should run in
+#         Default: '*'.
+#     hour: str - hour job should run in
+#         Default: '*'.
+#     minute: str - minute job should run in
+#         Default: '*'.
+#     special_time: str - special time specification nickname
+#         Values:
+#           annually: every year (same as yearly)
+#              daily: every day
+#             hourly: every hour
+#            monthly: every month
+#             reboot: every reboot
+#             weekly: every week
+#             yearly: every year
+#         Default: 'weekly'
+#     user: str - execute cronjob as specified user
+#     job: str - commands to execute
+#     state: str - state
+#         Values:
+#           present: create and manage the cronjob
+#           absent: delete the cronjob
+#         Default: 'present'.
+#
+# cron_jobs:
+#   cron_present:
+#     special_time: 'daily'
+#     user: 'root'
+#     job: 'echo "cron job named cron_present"'
+#     state: 'present'
+#   cron_job_2:  # expected deletion at final state
+#     month: '*'
+#     weekday: '*'
+#     day: '*'
+#     hour: '*'
+#     minute: '*'
+#     user: 'root'
+#     job: 'echo "another cron job named cron_job_2"'
+#     state: 'present'
+#   cron_absent:
+#     state: 'absent'
+#
+# Default: {}.
+cron_jobs: {}
+
+# Disable cron job usage warnings?
+#
+# Creating cronjobs will result in warning messages encouraging active
+# migration to modern job scheduling (systemd).
+#
+# Default: False.
+cron_warning_disable: false

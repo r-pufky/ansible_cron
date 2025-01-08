@@ -1,0 +1,38 @@
+---
+- name: 'Default | verify'
+  hosts: 'all'
+  gather_facts: false
+  tasks:
+    - name: 'Default | verify | query system cron jobs'
+      ansible.builtin.find:
+        paths: '/etc/cron.d'
+        file_type: 'file'
+      changed_when: false
+      register: _test_cron_list
+
+    - name: 'Default | verify | assert cron job created'
+      ansible.builtin.lineinfile:
+        path: '/etc/cron.d/cron_present'
+        regex: '.*cron_present.*'
+        state: 'absent'
+      changed_when: false
+      check_mode: true
+      register: _test_cron
+      failed_when: _test_cron.found == 0
+
+    - name: 'Default | verify | assert cron job deleted'
+      ansible.builtin.lineinfile:
+        path: '/etc/cron.d/cron_absent'
+        regex: '.*cron_absent.*'
+        state: 'absent'
+      changed_when: false
+      check_mode: true
+      register: _test_cron
+      failed_when: '"found" in _test_cron'
+
+    - name: 'Default | verify | assert cron_present'
+      ansible.builtin.assert:
+        that:
+          - _test_cron_list.files | length == 2
+        fail_msg: >
+          /etc/cron.d should contain only e2scrub_all, cron_present.
