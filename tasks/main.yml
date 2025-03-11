@@ -13,3 +13,5 @@
     job_name: '{{ item.key }}'
     config: '{{ item.value }}'
   loop: '{{ cron_jobs | default({}) | dict2items }}'
+  loop_control:
+    label: '{{ item.key }}'
