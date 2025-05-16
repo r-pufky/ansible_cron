@@ -3,13 +3,13 @@
   hosts: 'all'
   gather_facts: false
   tasks:
-    - name: 'Default | converge | apply r_pufky.srv.cron'
+    - name: 'Default | converge | apply r_pufky.deb.cron'
       ansible.builtin.include_role:
-        name: 'r_pufky.srv.cron'
+        name: 'r_pufky.deb.cron'
 
-    - name: 'Default | converge | apply r_pufky.srv.cron (remove cronjob)'
+    - name: 'Default | converge | apply r_pufky.deb.cron (remove cronjob)'
       ansible.builtin.include_role:
-        name: 'r_pufky.srv.cron'
+        name: 'r_pufky.deb.cron'
       vars:
         cron_jobs:
           cron_absent:

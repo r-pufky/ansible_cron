@@ -1,19 +1,15 @@
 # Cron
-Manage cron units.
-
 Manage cron units with a single call.
 
 ## Requirements
 [supported platforms](https://github.com/r-pufky/ansible_cron/blob/main/meta/main.yml)
 
-[collections/roles](https://github.com/r-pufky/ansible_cron/blob/main/meta/requirements.yml)
-
 ## Role Variables
 [defaults](https://github.com/r-pufky/ansible_cron/blob/main/defaults/main)
 
 ## Dependencies
-Part of the [r_pufky.srv](https://github.com/r-pufky/ansible_collection_srv)
-collection.
+**galaxy-ng** roles cannot be used independently. Part of
+[r_pufky.deb](https://github.com/r-pufky/ansible_collection_deb) collection.
 
 ## Example Playbook
 Create and delete cron jobs. This will create a cronjob on every system that
@@ -33,14 +29,14 @@ Apply the base role
 ``` yaml
 - name: 'Manage cron jobs'
   ansible.builtin.include_role:
-    name: 'r_pufky.srv.cron'
+    name: 'r_pufky.deb.cron'
 ```
 
 Install or remove cronjobs as part of another role
 ``` yaml
 - name: 'Manage cron jobs'
   ansible.builtin.include_role:
-    name: 'r_pufky.srv.cron'
+    name: 'r_pufky.deb.cron'
   vars:
     cron_jobs:
       some_role_cronjob:
@@ -53,7 +49,7 @@ Install or remove cronjobs as part of another role
 ```
 
 ## Development
-Configure [environment](https://github.com/r-pufky/ansible_collection_srv/blob/main/docs/dev/environment/README.md)
+Configure [environment](https://github.com/r-pufky/ansible_collection_docs/blob/main/dev/environment/README.md)
 
 Run all unit tests:
 ``` bash

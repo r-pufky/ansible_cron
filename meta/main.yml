@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: 'cron'
   author: 'r_pufky'
   description: 'Cron unit management.'
   company: 'N/A'

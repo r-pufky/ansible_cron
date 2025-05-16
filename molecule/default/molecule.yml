@@ -1,5 +1,13 @@
 ---
-# Create both types of cron jobs, as well as create and delete a cron job.
+###############################################################################
+# Default
+###############################################################################
+# Cron jobs are created and deleted.
+#
+# Tests:
+# * Create both types of cron jobs.
+# * Create and delete a cron job.
+
 dependency:
   name: 'galaxy'
 driver:
