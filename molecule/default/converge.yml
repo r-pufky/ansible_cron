@@ -1,13 +1,13 @@
 ---
-- name: 'Default | converge'
+- name: 'Converge'
   hosts: 'all'
   gather_facts: false
   tasks:
-    - name: 'Default | converge | apply r_pufky.deb.cron'
+    - name: 'Converge | apply r_pufky.deb.cron'
       ansible.builtin.include_role:
         name: 'r_pufky.deb.cron'
 
-    - name: 'Default | converge | apply r_pufky.deb.cron (remove cronjob)'
+    - name: 'Converge | apply r_pufky.deb.cron (remove cronjob)'
       ansible.builtin.include_role:
         name: 'r_pufky.deb.cron'
       vars:

@@ -1,16 +1,16 @@
 ---
-- name: 'Default | verify'
+- name: 'Verify'
   hosts: 'all'
   gather_facts: false
   tasks:
-    - name: 'Default | verify | query system cron jobs'
+    - name: 'Verify | query system cron jobs'
       ansible.builtin.find:
         paths: '/etc/cron.d'
         file_type: 'file'
       changed_when: false
       register: _test_cron_list
 
-    - name: 'Default | verify | assert cron job created'
+    - name: 'Verify | assert cron job created'
       ansible.builtin.lineinfile:
         path: '/etc/cron.d/cron_present'
         regex: '.*cron_present.*'
@@ -20,7 +20,7 @@
       register: _test_cron
       failed_when: _test_cron.found == 0
 
-    - name: 'Default | verify | assert cron job deleted'
+    - name: 'Verify | assert cron job deleted'
       ansible.builtin.lineinfile:
         path: '/etc/cron.d/cron_absent'
         regex: '.*cron_absent.*'
@@ -30,7 +30,7 @@
       register: _test_cron
       failed_when: '"found" in _test_cron'
 
-    - name: 'Default | verify | assert cron_present'
+    - name: 'Verify | assert cron_present'
       ansible.builtin.assert:
         quiet: true
         that:
