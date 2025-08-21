@@ -4,12 +4,12 @@
 ###############################################################################
 
 # Last time cron options were validated against a default configuration.
-cron_role_validate_date: '2024-06-25'
-cron_role_validate_release: 'bookworm'
+cron_role_validate_date: '2025-08-21'
+cron_role_validate_release: 'trixie'
 
 ###############################################################################
 # APT Packages
 ###############################################################################
 
 cron_role_packages:
-  - 'cron'  # cron support.
+  - 'cron'  # Cron support.

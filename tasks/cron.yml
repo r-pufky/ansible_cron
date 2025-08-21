@@ -27,14 +27,13 @@
       │                                                                   │
       │                            DEPRECATED.                            │
       │                                                                   │
-      │ Actively migrate cronjobs to modern job scheduling if able.       │
-      │                                                                   │
-      │ Use systemd timers. See: r_pufky.deb.systemd                      │
-      │                                                                   │
-      │ https://opensource.com/article/20/7/systemd-timers                │
-      │ https://wiki.archlinux.org/title/Systemd/Timers                   │
-      │                                                                   │
-      ╰───────────────────────────────────────────────────────────────────╯
+      ├───────────────────────────────────────────────────────────────────╯
+      │ Actively migrate cronjobs to modern job scheduling if able.
+      │
+      │ Use systemd timers. See: r_pufky.deb.systemd
+      │
+      │ https://opensource.com/article/20/7/systemd-timers
+      │ https://wiki.archlinux.org/title/Systemd/Timers
 
 - name: 'Cron | set standard scheduling {{ job_name }}'
   when: config.special_time is not defined

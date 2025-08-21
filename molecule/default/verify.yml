@@ -34,6 +34,6 @@
       ansible.builtin.assert:
         quiet: true
         that:
-          - _test_cron_list.files | length == 2
+          - _test_cron_list.files | length == 1
         fail_msg: >
-          ✘ /etc/cron.d should contain only e2scrub_all, cron_present.
+          ✘ /etc/cron.d should contain only cron_present.
